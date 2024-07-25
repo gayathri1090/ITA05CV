@@ -1,0 +1,27 @@
+import cv2
+
+# Load the image from the specified path
+img = cv2.imread(r"C:\Users\Gayat\OneDrive\Pictures\gayu.jpg")
+
+# Check if the image was successfully loaded
+if img is not None:
+    # Display the original image
+    cv2.imshow('Original', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()  # Close the image window
+
+    # Convert the image to grayscale
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Apply Gaussian blur to the grayscale image
+    img_blur = cv2.GaussianBlur(img_gray, (3, 3), 0)
+
+    # Apply the Sobel operator on the X axis
+    sobelx = cv2.Sobel(src=img_blur, ddepth=cv2.CV_64F, dx=1, dy=0, ksize=5)
+
+    # Display the Sobel X image
+    cv2.imshow('Sobel X', sobelx)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()  # Close the image window
+else:
+    print("Error: Image not found. Please check the file path.")
